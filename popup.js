@@ -19,14 +19,36 @@ var kittenGenerator = {
     parser.href = url;
     var u = parser.hostname.split('.');
     var host;
-    
+
     if(u.length === 2) {host = u[0]}
     else if(u.length === 3) {
       host = u[1];
     } 
-    alert(host);
+
+    console.log(host);
+
+    var xmlhttp = new XMLHttpRequest();
+    var url = "http://api.climatecounts.org/1/Companies.json?IncludeScores=True&StartsWith=True&Search=" + host;
+
+    xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        var myArr = JSON.parse(xmlhttp.responseText);
+        myFunc(myArr);
+        }
+    }
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
     });
 
+    function myFunc(myArr) {
+      setTimeout(function () {
+        console.log(myArr);
+        var score = myArr.Companies[0].Scores.Scores[0].Total;
+        alert(score);
+        console.log(score);
+      }, 500);
+    }
   },
 };
 

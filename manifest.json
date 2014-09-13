@@ -10,7 +10,7 @@
     "default_popup": "popup.html"
   },
   "permissions": [
-    "https://secure.flickr.com/",
+    "http://api.climatecounts.org/",
     "tabs"
   ]
   
