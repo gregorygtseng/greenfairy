@@ -45,7 +45,8 @@ var kittenGenerator = {
       setTimeout(function () {
         console.log(myArr);
         var score = myArr.Companies[0].Scores.Scores[0].Total;
-        alert(score);
+
+        document.getElementById("score").innerText = "This site has a score of " + score;
         console.log(score);
       }, 500);
     }
