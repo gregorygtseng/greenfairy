@@ -30,7 +30,7 @@ var greenFairy = {
             var apiUrl = self.climateCountsApi.getCompanies(host)
 
             xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var parsedJSON = JSON.parse(xmlhttp.responseText);
                     self.parseData(parsedJSON, host);
                 }
@@ -77,36 +77,41 @@ var greenFairy = {
         var x;
         for (x in companies) {
             if (companies[x].Name.match(re)) {
-                return true;
+                return [ true, companies[x].Name ];
             }
         }
-        return false;
+        return [ false, "" ];
     },
     parseData: function(parsedJSON, host, currentTab) {
         this.responseJSON = parsedJSON // debug
 
         var modifyHtml = this.htmlModifiers;
 
-        if (parsedJSON == undefined) {
+        if (parsedJSON === undefined) {
             modifyHtml.setNoData(host);
+            return;
         }
 
         var results = this.climateCountsApi.resultData;
         var matching = this.checkOnlyCompanyNames(parsedJSON.Companies, host)
-        if (matching) {
+        if (matching[0]) {
             if (parsedJSON.Companies.length > 1) {
                 var x;
                 for (x in parsedJSON.Companies) {
-                    var score = parsedJSON.Companies[x].Scores.Scores[0].Total
-                    results.SectorCode = parsedJSON.Companies[x].SectorCode;
-                    results.Company = parsedJSON.Companies[x].Name;
-                    results.Score = score;
+                    if (parsedJSON.Companies[x].Name === matching[1]) {
+                        var score = parsedJSON.Companies[x].Scores.Scores[1].Total
+                        results.SectorCode = parsedJSON.Companies[x].SectorCode;
+                        results.Company = parsedJSON.Companies[x].Name;
+                        results.Score = score;
 
-                    modifyHtml.setCompanyName(parsedJSON.Companies[x].Name);
-                    modifyHtml.setScore(score);
+                        modifyHtml.setCompanyName(parsedJSON.Companies[x].Name);
+                        modifyHtml.setScore(score);
+                    } else {
+                        console.log("didn't match on " + parsedJSON.Companies[x].Name)
+                    }
                 }
             } else {
-                var score = parsedJSON.Companies[0].Scores.Scores[0].Total;
+                var score = parsedJSON.Companies[0].Scores.Scores[1].Total;
                 results.SectorCode = parsedJSON.Companies[0].SectorCode;
                 results.Company = parsedJSON.Companies[0].Name;
                 results.Score = score;
@@ -116,6 +121,7 @@ var greenFairy = {
             }
         } else {
             modifyHtml.setNoData(host);
+            return;
         }
 
         // GET SECTOR INFORMATION FOR SEGMENTS
@@ -123,7 +129,7 @@ var greenFairy = {
         var apiUrl = this.climateCountsApi.getScores(results.SectorCode);
 
         xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 var parsedJSON = JSON.parse(xmlhttp.responseText);
                 var scores = parsedJSON.Scores;
                 modifyHtml.setSector(scores[0].Sector)
@@ -132,12 +138,13 @@ var greenFairy = {
                 var allCompanies = scores.length;
                 var i;
                 for (i = 0; i < scores.length; i++) {
-                    if (scores[i].Company == results.Company) {
+                    if (scores[i].Company === results.Company) {
                         ranking = i + 1;
                     }
                 }
                 modifyHtml.setRanking(ranking, allCompanies)
-                modifyHtml.setTopThree(scores[0].Company,scores[1].Company,scores[2].Company)
+                modifyHtml.setTopThree(scores[0].Company + " (" + scores[0].Total + ")",scores[1].Company + " (" + scores[1].Total + ")",scores[2].Company + " (" + scores[2].Total + ")")
+
 
 
 
@@ -162,7 +169,7 @@ var greenFairy = {
         var removeThese = [];
         for (x in components) {
             for (y in tldList) {
-                if (components[x] == tldList[y] ) {
+                if (components[x] === tldList[y] ) {
                     removeThese.unshift(x);
                 }
             }
