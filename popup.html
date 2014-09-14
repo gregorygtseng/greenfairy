@@ -1,40 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        min-width: 357px;
-        overflow-x: hidden;
-      }
-
-      img {
-        margin: 5px;
-        border: 2px solid black;
-        vertical-align: middle;
-        width: 75px;
-        height: 75px;
-      }
-      #main {
-        margin: 0 ;
-        background: rgba( 0, 141, 201, 1);
-        padding: 10px;
-      }
-    </style>
-
+    <title>Green Fairy Project</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
     <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
+    - JavaScript and HTML must be in separate files: see our Content Security
+    - Policy documentation[1] for details and explanation.
+    -
+    - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+    -->
     <script src="popup.js"></script>
   </head>
-  <body id="main">
-    <div> Climate Counts ! </div>
-
-    <div id="score"></div>
-  
+  <body>
+    <div  class="TopBar" class="pad">
+      <h2 class="inline CompanyDomain"></h2> <p class="inline"> has a Climate Score of </p> <h2 class="inline CompanyScore"></h2>
+    </div>
+    <div class="pad">
+      <h2>Compare</h2><br>
+      <p class="inline"> Take a look at how </p>
+      <div class="main CompanyDomain" id="BodyCompany"></div>
+      <p class="inline"> ranks when compared to other </p> <div class="main" id="BodySector"> Internet/Software</div> <p class="inline">companies. </p>
+      <br><br>
+      <div class="Graph">
+        <div class="floatleft" id="RelSector">  Sector Graph </div>
+        <div class="floatright" id="RelTotal">  Total Graph </div>
+        <div class="TopScores">
+          <br>
+          <br>
+          <p class="inline"> The Top Scoring </p> <div class="inline" id="GraphSector"> Internet/Software </div><p class="inline"> Companies are: </p>
+          <br>
+          <br>
+          <ol type="1">
+            <li>
+              <div id= "TopScore3">
+                <a href="http://www.microsoft.com/en-us/default.aspx"> Microsoft  </a>
+              </div>
+            </li>
+            <li>
+              <div id= "TopScore3">
+                <a href="http://www.ebay.com/"> eBay </a>
+              </div>
+            </li>
+            <li>
+              <div id= "TopScore3">
+                <a href="http://www.google.com/"> Google </a>
+              </div>
+            </li>
+          </ol>
+          <br>
+          <br>
+          <div class="inline CompanyDomain" id="CompanyName"></div>
+          <p class="inline"> is </p>
+          <div class="inline" id= "CompanyPosition"> 5th </div>
+          <p class="inline"> of </p>
+          <div class="inline" id= "SectorTotal"> 5 </div>
+          <p class="inline"> companies in this category and their score has </p>
+          <div class="inline" id= "Change"> decreased </div>
+          <p class="inline"> by </p> <div class="inline" id= "ChangeValue"> 3 </div>
+          <p class="inline"> points in the last year. </p>
+        </div>
+      </div>
+      <br>
+      <h2> What is a Climate Score? </h2>
+      <br>
+      <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: <br>
+      <strong class="tab">MEASURED</strong> their climate "footprint" <br>
+      <strong class="tab">REDUCED</strong> their impact on global warming <br>
+      <strong class="tab">SUPPORTED</strong> progressive climate legislation <br>
+      <strong class="tab">DISCLOSED</strong>, publicly, their climate actions <br>
+      <br>
+      Click <a target="_blank" href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
+      <br>
+      <h2> Explore Other Sectors </h2>
+      <br>
+      <p> Curious about which companies are doing the best in each category? Check out the sectors below for listings! </p>
+    </div>
   </body>
 </html>
-
