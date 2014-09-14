@@ -173,9 +173,8 @@ h3 {
   clear: both;
 }
 
-#TopScore1, #TopScore2, #TopScore3 a{
+#TopScore1, #TopScore2, #TopScore3 {
   color: #00a0D1;
-  text-decoration: underline;
 }
 
 #CompanyName{
