@@ -39,7 +39,6 @@ var greenFairy = {
             xmlhttp.open("GET", apiUrl, true);
             xmlhttp.send();
 
-
         });
     },
     htmlModifiers: {
@@ -55,6 +54,18 @@ var greenFairy = {
         },
         setSector: function(sector) {
             document.getElementsByClassName("js-sector")[0].innerText = sector;
+        },
+        setComparisons: function(data) {
+
+        },
+        setRanking: function(rank, all) {
+            document.getElementsByClassName("js-sectorrank")[0].innerText = "#"+ rank;
+            document.getElementsByClassName("js-sectortotal")[0].innerText = all;
+        },
+        setTopThree: function(one, two, three) {
+            document.getElementById("TopScore1").innerText = one;
+            document.getElementById("TopScore2").innerText = two;
+            document.getElementById("TopScore3").innerText = three;
         }
     },
     parseData: function(parsedJSON, host, currentTab) {
@@ -63,6 +74,7 @@ var greenFairy = {
             return
         }
         this.responseJSON = parsedJSON;
+        var results = this.climateCountsApi.resultData;
         var modifyHtml = this.htmlModifiers;
 
         if (parsedJSON.Companies.length > 1) {
@@ -71,29 +83,46 @@ var greenFairy = {
 
             for (x in parsedJSON.Companies) {
                 if (parsedJSON.Companies[x].Name.match(re)) {
-                    this.climateCountsApi.resultData.SectorCode = parsedJSON.Companies[x].SectorCode;
+                    var score = parsedJSON.Companies[x].Scores.Scores[0].Total
+                    results.SectorCode = parsedJSON.Companies[x].SectorCode;
+                    results.Company = parsedJSON.Companies[x].Name;
+                    results.Score = score;
+
                     modifyHtml.setCompanyName(parsedJSON.Companies[x].Name);
-                    modifyHtml.setScore(parsedJSON.Companies[x].Scores.Scores[0].Total);
+                    modifyHtml.setScore(score);
                 }
             }
         } else {
             modifyHtml.setCompanyName(parsedJSON.Companies[0].Name);
             var score = parsedJSON.Companies[0].Scores.Scores[0].Total;
             modifyHtml.setScore(score);
-            this.climateCountsApi.resultData.SectorCode = parsedJSON.Companies[0].SectorCode;
+            results.SectorCode = parsedJSON.Companies[0].SectorCode;
+            results.Company = parsedJSON.Companies[0].Name;
+            results.Score = score;
 
             chrome.browserAction.setBadgeText({text: score.toString()});
         }
 
         // GET SECTOR INFORMATION FOR SEGMENTS
         var xmlhttp = new XMLHttpRequest();
-        var apiUrl = this.climateCountsApi.getScores(this.climateCountsApi.resultData.SectorCode);
+        var apiUrl = this.climateCountsApi.getScores(results.SectorCode);
 
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var parsedJSON = JSON.parse(xmlhttp.responseText);
-                modifyHtml.setSector(parsedJSON.Scores[0].Sector)
-                // self.parseData(parsedJSON, host);
+                var scores = parsedJSON.Scores;
+                modifyHtml.setSector(scores[0].Sector)
+
+                var ranking;
+                var allCompanies = scores.length;
+                var i;
+                for (i = 0; i < scores.length; i++) {
+                    if (scores[i].Company == results.Company) {
+                        ranking = i + 1;
+                    }
+                }
+                modifyHtml.setRanking(ranking, allCompanies)
+                modifyHtml.setTopThree(scores[0].Company,scores[1].Company,scores[2].Company)
             }
         }
 
