@@ -61,6 +61,11 @@ var greenFairy = {
         setRanking: function(rank, all) {
             document.getElementsByClassName("js-sectorrank")[0].innerText = "#"+ rank;
             document.getElementsByClassName("js-sectortotal")[0].innerText = all;
+        },
+        setTopThree: function(one, two, three) {
+            document.getElementById("TopScore1").innerText = one;
+            document.getElementById("TopScore2").innerText = two;
+            document.getElementById("TopScore3").innerText = three;
         }
     },
     parseData: function(parsedJSON, host, currentTab) {
@@ -105,20 +110,19 @@ var greenFairy = {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 var parsedJSON = JSON.parse(xmlhttp.responseText);
-                modifyHtml.setSector(parsedJSON.Scores[0].Sector)
-                console.log(parsedJSON.Scores)
+                var scores = parsedJSON.Scores;
+                modifyHtml.setSector(scores[0].Sector)
+
                 var ranking;
-                var allCompanies = parsedJSON.Scores.length;
+                var allCompanies = scores.length;
                 var i;
-                for (i = 0; i < parsedJSON.Scores.length; i++) {
-                    console.log("itearatin" + i)
-                    if (parsedJSON.Scores[i].Company == results.Company) {
-                        console.log("owooo" + i)
+                for (i = 0; i < scores.length; i++) {
+                    if (scores[i].Company == results.Company) {
                         ranking = i + 1;
                     }
                 }
                 modifyHtml.setRanking(ranking, allCompanies)
-                // self.parseData(parsedJSON, host);
+                modifyHtml.setTopThree(scores[0].Company,scores[1].Company,scores[2].Company)
             }
         }
 
