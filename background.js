@@ -38,8 +38,8 @@ var climateCounts = {
 
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                var myArr = JSON.parse(xmlhttp.responseText);
-                self.getScores(myArr, host, tab);
+                var parsedJSON = JSON.parse(xmlhttp.responseText);
+                self.getScores(parsedJSON, host, tab);
             } else {
                 // alert("error with api?");
             }
@@ -48,17 +48,29 @@ var climateCounts = {
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     },
-    getScores: function(myArr, host, currentTab) {
+    getScores: function(parsedJSON, host, currentTab) {
         setTimeout(function () {
-            if (myArr != undefined && myArr.Companies.length != 0) {
-                var score = myArr.Companies[0].Scores.Scores[0].Total;
-                console.log(currentTab.id);
-                chrome.browserAction.setBadgeText({text: score.toString(), tabId: currentTab.id});
-            } else {
-                
+            if (parsedJSON == undefined) {
+                return
             }
+            this.responseJSON = parsedJSON;
 
+            if (parsedJSON.Companies.length > 1) {
+                var re = new RegExp( host, "i");
+                var x;
 
+                for (x in parsedJSON.Companies) {
+                    if (parsedJSON.Companies[x].Name.match(re)) {
+                        var score = parsedJSON.Companies[x].Scores.Scores[0].Total;
+                        chrome.browserAction.setBadgeText({text: score.toString(), 
+                            tabId: currentTab.id});
+                    }
+                }
+            } else {
+                var score = parsedJSON.Companies[0].Scores.Scores[0].Total;
+                chrome.browserAction.setBadgeText({text: score.toString(), 
+                    tabId: currentTab.id});
+            }
         }, 100);
     },
     tldList: [ // https://data.iana.org/TLD/tlds-alpha-by-domain.txt
