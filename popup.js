@@ -66,24 +66,37 @@ var greenFairy = {
             document.getElementById("TopScore1").innerText = one;
             document.getElementById("TopScore2").innerText = two;
             document.getElementById("TopScore3").innerText = three;
-        }
-    },
-    parseData: function(parsedJSON, host, currentTab) {
-        if (parsedJSON == undefined) {
+        },
+        setNoData: function(host) {
             document.getElementById("js-notfound").innerText = host;
             document.getElementById("no-data").style.display = "block";
         }
+    },
+    checkOnlyCompanyNames: function(companies, host) {
+        var re = new RegExp( host, "i");
+        var x;
+        for (x in companies) {
+            if (companies[x].Name.match(re)) {
+                return true;
+            }
+        }
+        return false;
+    },
+    parseData: function(parsedJSON, host, currentTab) {
+        this.responseJSON = parsedJSON // debug
 
-        this.responseJSON = parsedJSON;
-        var results = this.climateCountsApi.resultData;
         var modifyHtml = this.htmlModifiers;
 
-        if (parsedJSON.Companies.length > 1) {
-            var re = new RegExp( host, "i");
-            var x;
+        if (parsedJSON == undefined) {
+            modifyHtml.setNoData(host);
+        }
 
-            for (x in parsedJSON.Companies) {
-                if (parsedJSON.Companies[x].Name.match(re)) {
+        var results = this.climateCountsApi.resultData;
+        var matching = this.checkOnlyCompanyNames(parsedJSON.Companies, host)
+        if (matching) {
+            if (parsedJSON.Companies.length > 1) {
+                var x;
+                for (x in parsedJSON.Companies) {
                     var score = parsedJSON.Companies[x].Scores.Scores[0].Total
                     results.SectorCode = parsedJSON.Companies[x].SectorCode;
                     results.Company = parsedJSON.Companies[x].Name;
@@ -92,14 +105,17 @@ var greenFairy = {
                     modifyHtml.setCompanyName(parsedJSON.Companies[x].Name);
                     modifyHtml.setScore(score);
                 }
+            } else {
+                var score = parsedJSON.Companies[0].Scores.Scores[0].Total;
+                results.SectorCode = parsedJSON.Companies[0].SectorCode;
+                results.Company = parsedJSON.Companies[0].Name;
+                results.Score = score;
+
+                modifyHtml.setCompanyName(parsedJSON.Companies[0].Name);
+                modifyHtml.setScore(score);
             }
         } else {
-            modifyHtml.setCompanyName(parsedJSON.Companies[0].Name);
-            var score = parsedJSON.Companies[0].Scores.Scores[0].Total;
-            modifyHtml.setScore(score);
-            results.SectorCode = parsedJSON.Companies[0].SectorCode;
-            results.Company = parsedJSON.Companies[0].Name;
-            results.Score = score;
+            modifyHtml.setNoData(host);
         }
 
         // GET SECTOR INFORMATION FOR SEGMENTS
