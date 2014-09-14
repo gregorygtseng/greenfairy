@@ -121,7 +121,7 @@ var greenFairy = {
             modifyHtml.setNoData(host);
         }
         //MAKE GRAPHS USING SECTOR CODE
-        makeGraphs(results.SectorCode, results.Score);
+        this.makeGraphs(results.SectorCode);
     
         // GET SECTOR INFORMATION FOR SEGMENTS
         var xmlhttp = new XMLHttpRequest();
@@ -177,21 +177,23 @@ var greenFairy = {
         }
         return components[components.length - 1]
     },
-    makeGraphs: function(sectorCode, ownScore, ) {
-        var sector = sectorInfo[SectorCode];
+    makeGraphs: function(sectorCode, ownScore) {
+        var sector = this.sectorInfo[sectorCode];
         var aggregateSectorScore = sector.NumScores * sector.Total;
         console.log(aggregateSectorScore);
-        console.log(ownScore);
-        var ownPercent = (ownScore *100)/aggregateSectorScore;
+        
+        var ownPercent = (this.climateCountsApi.resultData.Score *100)/aggregateSectorScore;
         var otherPercent = 100 - ownPercent;
         var graphData = [
-        [sector.Sector, otherPercent],
+        {   name: sector.Sector,
+            y: otherPercent},
         {
-            name: resuls.Company,
-            y: ownScore,
+            name: this.climateCountsApi.resultData.Company,
+            y: ownPercent,
             selected: true
         }
-        ]
+        ];
+        console.log(graphData)
         $(function () {
             $('#RelSector').highcharts({
                 chart: {
@@ -227,7 +229,11 @@ var greenFairy = {
                         }
                     }
                 },
-                series: graphData
+                series: [{
+                type: 'pie',
+                name: 'Sector Share',
+                data: graphData
+                }]
             });
 });
     },
@@ -434,7 +440,7 @@ var greenFairy = {
 
 document.addEventListener('DOMContentLoaded', function () {
     greenFairy.initialize();
-    greenFairy.makeGraphs();
+    
 });
 
 
