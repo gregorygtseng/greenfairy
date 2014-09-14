@@ -32,12 +32,12 @@ blockquote, q {
 body {
   background-color: #00a0D1;
   font-family: "Helvetica-Light", "HelveticaNeue-Light", "Helvetica Neue Light", Arial, sans-serif;
-  font-size: 12pt;
+  font-size: 11pt;
 }
 
 body{
-  min-width: 400px;
-  max-width: 400px;
+  max-width: 350px;
+  min-width: 350px;
 }
 
 ::selection { background: 0182a9; }
@@ -58,8 +58,8 @@ p strong{
 
 h1, h2, h3 {
   font-family: Impact, Charcoal, sans-serif;
-  font-size: 14pt;
-  font-weight: 100;
+  font-size: 12pt;
+  font-weight: lighter;
   text-align:left;
   letter-spacing:.05em;
 
@@ -74,8 +74,29 @@ h2, h3{
 }
 
 h3 {
-  padding-top: 14pt;
-  padding-bottom: 5pt;
+  padding-top: 3pt;
+  padding-bottom: 8pt;
+}
+
+form{
+  color: #fff;
+  font-weight: bold;
+}
+
+.forminput{
+  width: 300px;
+  height: 15pt;
+  margin-top: 6px;
+}
+
+.formsubmit{
+  float: right;
+  color: #fff;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+  margin-top: 10px;
+  margin-right: 4px;
 }
 
 .pad{
@@ -100,7 +121,34 @@ h3 {
 }
 
 .tab{
-  margin-left: 20px;
+  margin-left: 40px;
+}
+
+.half-line {
+  line-height: .5em;
+}
+
+.inset{
+  padding-left: 20px;
+}
+
+.Logo{
+  height:20pt; 
+  vertical-align: middle;
+  margin-bottom: 7pt;
+  float: right;
+}
+
+.TopBanner h2{
+  color: #90ed7d;
+}
+
+.TopBanner {
+  background-color: #fda500;
+  height: 30pt;
+  line-height: 30pt;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .TopBar {
@@ -118,11 +166,12 @@ h3 {
 
 .TopBar p {
   color: fff;
+  font-size: 11pt
 }
 
 .Graph{
   background-color: #fff;
-  height: 385px;
+/*  height: 344px;*/
   padding: 25px;
 }
 
@@ -164,8 +213,8 @@ h3 {
 
 #RelSector, #RelTotal{
   padding:13px;
-  width:120px;
-  height: 120px;
+  width:95px;
+  height: 95px;
   border: 2px solid;
 }
 
@@ -183,7 +232,7 @@ h3 {
 }
 
 #CompanyPosition{
-  color: #90ed7d;
+  color: #454545;
   font-weight: bold;
 }
 
@@ -200,4 +249,17 @@ h3 {
 #ChangeValue{
   color: #454545;
   font-weight: bold;
+}
+
+.Closer{
+  clear: Both;
+  text-align: right;
+}
+
+input[type=submit] {padding:6px 30px; background:#454545; border:0 none;
+-webkit-border-radius: 5px;
+border-radius: 0px; }
+
+#no-data, #loaded {
+  display: none;
 }
