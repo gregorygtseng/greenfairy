@@ -23,6 +23,7 @@ var climateCounts = {
     getWindowLocation: function () {
         var self = this;
         chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs) {
+            var currentTab = tabs[0];
             var url = tabs[0].url;
             var host = self.parseUri(url);
             var xmlhttp = new XMLHttpRequest();
@@ -41,7 +42,7 @@ var climateCounts = {
             xmlhttp.send();
         });
     },
-    getScores: function(myArr, host) {
+    getScores: function(myArr, host, currentTab) {
         setTimeout(function () {
             if (myArr != undefined && myArr.Companies.length != 0) {
                 var score = myArr.Companies[0].Scores.Scores[0].Total;
@@ -52,6 +53,7 @@ var climateCounts = {
                     names[x].innerText = myArr.Companies[0].Name;
                 }
                 document.getElementsByClassName("CompanyScore")[0].innerText = score;
+                chrome.browserAction.setBadgeText({text: score.toString()});
             } else {
                 document.getElementsByTagName("body")[0].innerText = "No score found for " + host + ".. \n\n  WE NEED TO FIX THIS!!!";
             }
