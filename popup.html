@@ -1,40 +1,198 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Getting Started Extension's Popup</title>
+    <title>Green Fairy Project</title>
     <style>
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure,
+      footer, header, hgroup, menu, nav, section {
+        display: block;
+      }
+      blockquote, q {
+        quotes: none;
+      }
       body {
-        min-width: 357px;
-        overflow-x: hidden;
+        background-color: #00a0D1;
+        font-family:Helvetica, Arial, sans-serif;
+        font-size: 12pt;
       }
-
-      img {
-        margin: 5px;
-        border: 2px solid black;
+      body{
+        min-width: 400px;
+      }
+      ::selection { background: 0182a9; }
+      a {
+        color: #454545;
+        text-align:left;
+      }
+      p {
+        color: #fff;
+        text-align:left;
+      }
+      p strong{
+        font-weight: bold;
+      }
+      h1, h2, h3 {
+        font-family: Impact, Charcoal, sans-serif;
+        font-size: 14pt;
+        font-weight: 100;
+        text-align:left;
+      }
+      h1 {
+        color:#00a0D1;
+      }
+      h2, h3{
+        color: #fff;
+      }
+      h3 {
+        padding-top: 14pt;
+        padding-bottom: 5pt;
+      }
+      .pad{
+        padding: 20px;
+      }
+      .inline{
+        display: inline;
+      }
+      .main{
+        text-color: #fff;
+        font-weight: bold;
+      }
+      .floatleft{
+        float:left;
+      }
+      .floatright{
+        float:right;
+      }
+      .TopBar {
+        background-color: #454545;
+        padding: 0;
+        height: 30pt;
+        line-height: 30pt;
         vertical-align: middle;
-        width: 75px;
-        height: 75px;
+        text-align: center;
       }
-      #main {
-        margin: 0 ;
-        background: rgba( 0, 141, 201, 1);
-        padding: 10px;
+      .TopBar a {
+        color: #454545;
+      }
+      .TopBar p {
+        color: fff;
+      }
+      .Graph{
+        background-color: #fff;
+        height: 400px;
+        padding: 20px;
+      }
+      .Graph p{
+        color: #454545;
+      }
+      .Graph ol{
+        color: #454545;
+        padding-left: 50px;
+      }
+      .Sector{
+        color: #00a0D1;
+        weight: bold;
+      }
+      .Company{
+        color: #454545;
+        font-weight: bold;
+      }
+      #BodyCompany, #BodySector {
+        display: inline;
+      }
+      #GraphCompany{
+        display: inline;
+        color: #454545;
+        font-weight: bold;
+      }
+      #GraphSector {
+        display: inline;
+        color: #00a0D1;
+        font-weight: bold
+      }
+      #RelSector, #RelTotal{
+        padding:13px;
+        width:120px;
+        height: 120px;
+        border: 2px solid;
+      }
+      #Change{
+        color: #fda500;
+        font-weight: bold;
+      }
+      .TopScores{
+        clear: both;
+      }
+      #TopScore1, #TopScore2, #TopScore3 a{
+        color: #00a0D1;
+        text-decoration: underline;
+      }
+      #CompanyName{
+        color: #00a0D1;
+        text-decoration: underline;
+      }
+      #CompanyPosition{
+        color: #fda500;
+        font-weight: bold;
+      }
+      #SectorTotal{
+        color: #fda500;
+        font-weight:bold;
       }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
     <script src="popup.js"></script>
   </head>
-  <body id="main">
-    <div> Climate Counts ! </div>
-
-    <div id="score"></div>
-  
-  </body>
+  <body>
+    <div  class="TopBar" class="pad">
+      <h2 class="inline"> Amazon.com </h2> <p class="inline"> has a Climate Score of </p> <h1 class="inline"> 11 <h2>
+    </div>
+    <div class="pad">
+      <h2>Compare</h2><br>
+      <p class="inline"> how does </p> <div class="main" id="BodyCompany"> Amazon.com </div> <p class="inline"> rank when compared to other </p> <div class="main" id="BodySector"> Internet/Software</div> <p class="inline">companies </p>
+      <br><br>
+      <div class="Graph">
+        <div class= "floatleft" id="RelSector"></div>
+        <div class= "floatright" id="RelTotal"></div>
+        <div class="TopScores"> <!-- I don't know why the spacing is weird here -->
+        <br><br>
+        <p class="inline"> Top Scoring </p> <div class="inline" id="GraphSector"> Internet/Software </div><p class="inline"> Companies: </p>
+        <ol type="1">
+          <li><div id="TopScore3"> <a href="http://www.microsoft.com/en-us/default.aspx"> Microsoft </a> </div></li>
+          <li><div id="TopScore3"> <a href="http://www.ebay.com/"> eBay </a> </div></li>
+          <li><div id="TopScore3"> <a href="http://www.google.com/"> Google </a> </div></li>
+        </ol>
+        <br>
+        <div class= "inline" id="CompanyName">Amazon.com</div><p class="inline"> is <div class="inline" id="CompanyPosition">5th</div> <p class="inline"> of </p> <div class="inline" id="SectorTotal"> 5 </div> <p class="inline"> companies in this category.</p>
+        <br>
+        <br>
+        <div class="inline" id="Company">Amazon.com</div><p class= "inline">'s score has </p> <div class="inline" id="Change"> decreased </div> <p class="inline"> by </p> <div class="inline" id="ChangeValue"> 3 </div> <p class="inline"> points in the last year. </p>
+      </div>
+    </div>
+    <br><br>
+    <h2> What is a Climate Score?</h2>
+    <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: </p>
+    <br><br>
+    <h2> Explore Other Sectors</h2>
+  </div>
+</body>
 </html>
-
