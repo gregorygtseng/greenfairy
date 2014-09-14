@@ -13,13 +13,13 @@
   </head>
   <body>
     <div  class="TopBar" class="pad">
-      <h2 class="inline CompanyDomain"></h2> <p class="inline"> has a Climate Score of </p> <h2 class="inline CompanyScore"></h2>
+      <h2 class="inline js-companydomain"></h2> <p class="inline"> has a Climate Score of </p> <h2 class="inline js-companyscore"></h2>
     </div>
     <div class="pad">
       <h2>Compare</h2><br>
       <p class="inline"> Take a look at how </p>
-      <div class="main CompanyDomain" id="BodyCompany"></div>
-      <p class="inline"> ranks when compared to other </p> <div class="main" id="BodySector"> Internet/Software</div> <p class="inline">companies. </p>
+      <div class="main js-companydomain" id="BodyCompany"></div>
+      <p class="inline"> ranks when compared to other </p> <div class="main js-sector" id="BodySector"></div> <p class="inline">companies. </p>
       <br><br>
       <div class="Graph">
         <div class="floatleft" id="RelSector">  Sector Graph </div>
@@ -27,7 +27,7 @@
         <div class="TopScores">
           <br>
           <br>
-          <p class="inline"> The Top Scoring </p> <div class="inline" id="GraphSector"> Internet/Software </div><p class="inline"> Companies are: </p>
+          <p class="inline"> The Top Scoring </p> <div class="inline js-sector" id="GraphSector"> </div><p class="inline"> Companies are: </p>
           <br>
           <br>
           <ol type="1">
@@ -49,7 +49,7 @@
           </ol>
           <br>
           <br>
-          <div class="inline CompanyDomain" id="CompanyName"></div>
+          <div class="inline js-companydomain" id="CompanyName"></div>
           <p class="inline"> is </p>
           <div class="inline" id= "CompanyPosition"> 5th </div>
           <p class="inline"> of </p>
