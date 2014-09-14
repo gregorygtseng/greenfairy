@@ -73,6 +73,9 @@ var greenFairy = {
         setNoData: function(host) {
             document.getElementById("js-notfound").innerText = host;
             document.getElementById("no-data").style.display = "block";
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("loaded").style.display = "none";
+
         }
     },
     checkOnlyCompanyNames: function(companies, host) {
@@ -155,7 +158,10 @@ var greenFairy = {
 
 
                 /// NOW SHOW THE STUFF
-                document.getElementById("loaded").style.display = "block";
+                setTimeout(function() {
+                    document.getElementById("loading").style.display = "none";
+                    document.getElementById("loaded").style.display = "block";
+                }, 100)
             }
         }
 
