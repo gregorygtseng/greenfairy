@@ -131,7 +131,7 @@ var greenFairy = {
         }
         //MAKE GRAPHS USING SECTOR CODE
         this.makeGraph1(results.SectorCode);
-        this.makeGraph2(results.SectorCode);
+        // this.makeGraph2(results.SectorCode);
     
         // GET SECTOR INFORMATION FOR SEGMENTS
         var xmlhttp = new XMLHttpRequest();
