@@ -14,64 +14,128 @@
     <script src="jquery.min.js"></script>
   </script>
   </head>
+  <a href="#"></a>
   <body>
-  <div id="container" class="container"></div>
-    <div  class="TopBar" class="pad">
-      <h2 class="inline js-companydomain"></h2> <p class="inline"> has a Climate Score of </p> <h2 class="inline js-companyscore"></h2>
+    <div class="TopBanner" class="pad">
+      <h2 class="inline" class="ExtensionName"> Green Fairy</h2>
+      <h3 class="inline"> Climate Score Lookup</h3>
     </div>
-    <div class="pad">
-      <h2>Compare</h2><br>
-      <p class="inline"> Take a look at how </p>
-      <div class="main js-companydomain" id="BodyCompany"></div>
-      <p class="inline"> ranks when compared to other </p> <div class="main js-sector" id="BodySector"></div> <p class="inline">companies. </p>
-      <br><br>
-      <div class="Graph">
-        <div class="floatleft" id="RelSector">  Sector Graph </div>
-        <div class="floatright" id="RelTotal">  Total Graph </div>
-        <div class="TopScores">
+    <div id="loading"></div>
+    <div id="no-data">
+      <div class="TopBar" class="pad">
+        <h2 class = "inline"> No Data </h2>
+        <p class = "inline"> is available for </p>
+        <h1 class="inline" id="js-notfound"> GMail.com <h1> <!-- js: Company Name -->
+      </div>
+      <div class = "pad">
+        <h3>Want that to See Their Data?</h3>
+        <p class ="inline"> Unfortunately, we don't have every company's data in our records. But, if you fill in the form below, we'll go ahead and ask the company to disclose some information for our database!
+        <br>
+        <br>
+        Thanks for doing your part!
+        </p>
+        <br>
+        <br>
+        <form>
+          Company Name:
+          <br>
+          <input type = "text" name = "Company Name" class="forminput">
           <br>
           <br>
-          <p class="inline"> The Top Scoring </p> <div class="inline js-sector" id="GraphSector"> </div><p class="inline"> Companies are: </p>
+          Company Website:
+          <br>
+          <input type = "text" name = "Company Website" class="forminput">
           <br>
           <br>
-          <ol type="1">
-            <li>
-              <div id="TopScore1"></div>
-            </li>
-            <li>
-              <div id="TopScore2"></div>
-            </li>
-            <li>
-              <div id="TopScore3"></div>
-            </li>
-          </ol>
+          Company Contact Email:
+          <br>
+          <input type = "text" name = "Company Contact Email" class="forminput">
           <br>
           <br>
-          <div class="inline js-companydomain" id="CompanyName"></div>
-          <p class="inline"> is </p>
-          <div class="inline js-sectorrank" id= "CompanyPosition"></div>
-          <p class="inline"> of </p>
-          <div class="inline js-sectortotal" id= "SectorTotal"></div>
-          <p class="inline"> companies in this category and their score has </p>
-          <div class="inline" id= "Change"> decreased </div>
-          <p class="inline"> by </p> <div class="inline" id= "ChangeValue"> 3 </div>
-          <p class="inline"> points in the last year. </p>
+          Your Email for Updates (Optional):
+          <br>
+          <input type = "text" name = "UserEmail" class="forminput">
+          <br>
+          <br>
+          <input type="submit" value="Submit!" class="formsubmit">
+        </form>
+      </div>
+    </div>
+    <div id="loaded">
+      <div  class="TopBar" class="pad">
+        <h2 class="inline js-companydomain"></h2> <!-- js: Company Name -->
+        <p class="inline">'s Climate Score: </p>
+        <h1 class="inline js-companyscore"><h2> <!-- js: Company Score -->
+      </div>
+      <div class="pad">
+        <h3>Compare</h3>
+        <p class="inline"> How does </p>
+        <div class="main js-companydomain" id="BodyCompany"></div> <!-- js: Company Name -->
+        <p class="inline"> compare to other </p>
+        <div class="main js-sector" id="BodySector"></div> <!-- js: Company Sector -->
+        <p class="inline">companies? </p>
+        <br>
+        <br>
+        <div class="Graph">
+          <div class="floatleft" id="RelSector">  Sector Graph </div> <!-- js: Sector Graph -->
+          <div class="floatright" id="RelTotal">  Total Graph </div> <!-- js: Total Graph -->
+          <div class="TopScores">
+            <br>
+            <p class="inline"> Try to support these Top Scoring </p>
+            <div class="inline js-sector" id="GraphSector"></div> <!-- js: Company Sector -->
+            <p class="inline"> companies while shopping:
+            </p>
+            <br>
+            <p class="half-line">&nbsp;</p>
+            <ol type="1">
+              <li>
+                <div id="TopScore1">
+                </div>
+              </li>
+              <li>
+                <div id="TopScore2">
+                </div>
+              </li>
+              <li>
+                <div id="TopScore3">
+                </div>
+              </li>
+            </ol>
+            <br>
+            <div class="inline js-companydomain" id="CompanyName"></div> <!-- js: Company Name -->
+            <p class="inline"> ranks </p>
+            <div class="inline js-sectorrank" id="CompanyPosition"></div> <!-- js: Company Rank -->
+            <p class="inline"> of </p>
+            <div class="inline js-sectortotal" id="SectorTotal"></div> <!-- js: Sector Total-->
+            <p class="inline"> companies in this category.</p>
+            <br><br>
+            <p class="inline">The company's score has </p>
+            <div class="inline" id="Change"> decreased </div> <!-- js: Company Status (based on Positive/Negative) -->
+            <p class="inline"> by </p>
+            <div class="inline" id="ChangeValue"> 3 </div> <!-- js: Company Change -->
+            <p class="inline"> points in the last year. </p>
+          </div>
         </div>
+        <br>
+      </div>
+    </div>
+    <div id="footer" class="pad">
+      <h3> What is a Climate Score? </h3>
+      <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: </p>
+      <div class="inset">
+        <p><strong>MEASURED</strong> their climate "footprint",</p>
+        <p><strong>REDUCED</strong> their impact on global warming,</p>
+        <p><strong>SUPPORTED</strong> progressive climate legislation, and publicly</p>
+        <p><strong>DISCLOSED</strong> their climate actions.</p>
       </div>
       <br>
-      <h2> What is a Climate Score? </h2>
+      <p> Click <a target="_blank" href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
       <br>
-      <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: <br>
-      <strong class="tab">MEASURED</strong> their climate "footprint" <br>
-      <strong class="tab">REDUCED</strong> their impact on global warming <br>
-      <strong class="tab">SUPPORTED</strong> progressive climate legislation <br>
-      <strong class="tab">DISCLOSED</strong>, publicly, their climate actions <br>
-      <br>
-      Click <a target="_blank" href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
-      <br>
-      <h2> Explore Other Sectors </h2>
-      <br>
+      <h3> Explore Other Sectors </h3>
       <p> Curious about which companies are doing the best in each category? Check out the sectors below for listings! </p>
+      <br>
+      <br>
+      <img src="Banner16x193pt.png" class="Logo" class="inline"> </img> <br> <h2 class="Closer"> #Hack4Good </h2>
     </div>
   </body>
 </html>

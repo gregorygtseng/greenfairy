@@ -70,9 +70,10 @@ var greenFairy = {
     },
     parseData: function(parsedJSON, host, currentTab) {
         if (parsedJSON == undefined) {
-            document.getElementsByTagName("body")[0].innerText = "No score found for " + host + ".. \n\n  WE NEED TO FIX THIS!!!";
-            return
+            document.getElementById("js-notfound").innerText = host;
+            document.getElementById("no-data").style.display = "block";
         }
+
         this.responseJSON = parsedJSON;
         var results = this.climateCountsApi.resultData;
         var modifyHtml = this.htmlModifiers;
@@ -99,7 +100,6 @@ var greenFairy = {
             results.SectorCode = parsedJSON.Companies[0].SectorCode;
             results.Company = parsedJSON.Companies[0].Name;
             results.Score = score;
-
         }
 
         // GET SECTOR INFORMATION FOR SEGMENTS
@@ -122,12 +122,17 @@ var greenFairy = {
                 }
                 modifyHtml.setRanking(ranking, allCompanies)
                 modifyHtml.setTopThree(scores[0].Company,scores[1].Company,scores[2].Company)
+
+
+
+                /// NOW SHOW THE STUFF
+                document.getElementById("loaded").style.display = "block";
             }
         }
 
         xmlhttp.open("GET", apiUrl, true);
         xmlhttp.send();
-
+        
     },
     parseUri: function(url) {
         var parser = document.createElement('a');
