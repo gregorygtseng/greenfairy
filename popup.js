@@ -26,14 +26,14 @@ var climateCounts = {
             var url = tabs[0].url;
             var host = self.parseUri(url);
             var xmlhttp = new XMLHttpRequest();
-            document.getElementById("score").innerText = "Searching " + host;
             var url = "http://api.climatecounts.org/1/Companies.json?IncludeBrands=True&IncludeScores=True&StartsWith=True&Search=" + host;
 
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                     var myArr = JSON.parse(xmlhttp.responseText);
-
                     self.getScores(myArr, host);
+                } else {
+                    // alert("error with api?");
                 }
             }
 
@@ -45,10 +45,15 @@ var climateCounts = {
         setTimeout(function () {
             if (myArr != undefined && myArr.Companies.length != 0) {
                 var score = myArr.Companies[0].Scores.Scores[0].Total;
+                var names = document.getElementsByClassName("CompanyDomain");
+                var x;
 
-                document.getElementById("score").innerText = host + " has a score of " + score;
+                for (x in names) {
+                    names[x].innerText = myArr.Companies[0].Name;
+                }
+                document.getElementsByClassName("CompanyScore")[0].innerText = score;
             } else {
-                document.getElementById("score").innerText = "No score found for " + host;
+                document.getElementsByTagName("body")[0].innerText = "No score found for " + host + ".. \n\n  WE NEED TO FIX THIS!!!";
             }
 
 
