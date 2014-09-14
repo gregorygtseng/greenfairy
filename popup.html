@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Green Fairy</title>
+    <title>Green Fairy Project</title>
     <link rel="stylesheet" type="text/css" href="popup.css">
     <!--
     - JavaScript and HTML must be in separate files: see our Content Security
@@ -10,70 +10,88 @@
     - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
     -->
     <script src="popup.js"></script>
-  </head>
+</head>
   <body>
-    <div  class="TopBar" class="pad">
-      <h2 class="inline CompanyDomain"></h2> <p class="inline"> has a Climate Score of </p> <h2 class="inline CompanyScore"></h2>
+    <div  class="TopBanner" class = "pad"> 
+      <h2 class = "inline" class = "ExtensionName"> Green Fairy </h2> 
+      <h3 class="inline"> Climate Score Lookup</h3>
     </div>
-    <div class="pad">
-      <h2>Compare</h2><br>
-      <p class="inline"> Take a look at how </p>
-      <div class="main CompanyDomain" id="BodyCompany"></div>
-      <p class="inline"> ranks when compared to other </p> <div class="main" id="BodySector"> Internet/Software</div> <p class="inline">companies. </p>
-      <br><br>
-      <div class="Graph">
-        <div class="floatleft" id="RelSector">  Sector Graph </div>
-        <div class="floatright" id="RelTotal">  Total Graph </div>
-        <div class="TopScores">
+    <div  class="TopBar" class = "pad"> 
+      <h2 class = "inline"> Amazon.com</h2> <!-- js: Company Name -->
+      <p class = "inline">'s Climate Score: </p> 
+      <h1 class = "inline"> 11 <h2> <!-- js: Company Score -->
+    </div>
+    <div class = "pad"> 
+      <h3>Compare</h3>
+      <p class ="inline"> How does </p> 
+      <div class = "main" id="BodyCompany"> Amazon.com </div> <!-- js: Company Name -->
+      <p class ="inline"> compare to other </p> 
+      <div class = "main" id="BodySector"> Internet/Software</div> <!-- js: Company Sector -->
+      <p class ="inline">companies? </p>
+      <br>
+      <br>
+      <div class="Graph">      
+        <div class= "floatleft" id="RelSector">  Sector Graph </div> <!-- js: Sector Graph -->
+        <div class= "floatright" id="RelTotal">  Total Graph </div> <!-- js: Total Graph -->
+        <div class = "TopScores">
           <br>
-          <br>
-          <p class="inline"> The Top Scoring </p> <div class="inline" id="GraphSector"> Internet/Software </div><p class="inline"> Companies are: </p>
-          <br>
-          <br>
-          <ol type="1">
-            <li>
-              <div id= "TopScore3">
-                <a href="http://www.microsoft.com/en-us/default.aspx"> Microsoft  </a>
-              </div>
-            </li>
-            <li>
-              <div id= "TopScore3">
-                <a href="http://www.ebay.com/"> eBay </a>
-              </div>
-            </li>
-            <li>
-              <div id= "TopScore3">
-                <a href="http://www.google.com/"> Google </a>
-              </div>
-            </li>
-          </ol>
-          <br>
-          <br>
-          <div class="inline CompanyDomain" id="CompanyName"></div>
-          <p class="inline"> is </p>
-          <div class="inline" id= "CompanyPosition"> 5th </div>
-          <p class="inline"> of </p>
-          <div class="inline" id= "SectorTotal"> 5 </div>
-          <p class="inline"> companies in this category and their score has </p>
-          <div class="inline" id= "Change"> decreased </div>
-          <p class="inline"> by </p> <div class="inline" id= "ChangeValue"> 3 </div>
-          <p class="inline"> points in the last year. </p>
-        </div>
+          <p class="inline"> Try to support these Top Scoring </p> 
+          <div class="inline" id = "GraphSector"> Internet/Software </div> <!-- js: Company Sector -->
+          <p class = "inline"> companies while shopping: 
+        </p>
+        <br>
+        <p class="half-line">&nbsp;</p>
+        <ol type="1">
+          <li>
+            <div id = "TopScore3"> <!-- These are supposed to be all TopScore3, somehow it's bugging out w/o -->
+              <a href="http://www.microsoft.com/en-us/default.aspx"> Microsoft </a> <!-- js: Sector First Place , Sector First Place url -->
+            </div>
+          </li>
+          <li>
+            <div id = "TopScore3"> 
+              <a href="http://www.ebay.com/"> eBay </a> <!-- js: Sector Second Place, Sector Second Place url-->
+            </div>
+          </li>
+          <li>
+            <div id = "TopScore3"> 
+              <a href="http://www.google.com/"> Google </a> <!-- js: Sector Third Place, Sector Third Place url-->
+            </div>
+          </li>
+        </ol>
+        <br>
+        <div class= "inline" id="CompanyName"> Amazon.com </div> <!-- js: Company Name -->
+        <p class = "inline"> ranks </p>
+        <div class = "inline" id = "CompanyPosition"> 5th </div> <!-- js: Company Rank -->
+        <p class = "inline"> of </p> 
+        <div class = "inline" id = "SectorTotal"> 5 </div> <!-- js: Sector Total-->
+        <p class = "inline"> companies in this category.</p>
+        <br><br>
+        <p class = "inline">The company's score has </p> 
+        <div class = "inline" id = "Change"> decreased </div> <!-- js: Company Status (based on Positive/Negative) -->
+        <p class = "inline"> by </p> 
+        <div class = "inline" id = "ChangeValue"> 3 </div> <!-- js: Company Change -->
+        <p class = "inline"> points in the last year. </p>
       </div>
-      <br>
-      <h2> What is a Climate Score? </h2>
-      <br>
-      <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: <br>
-      <strong class="tab">MEASURED</strong> their climate "footprint" <br>
-      <strong class="tab">REDUCED</strong> their impact on global warming <br>
-      <strong class="tab">SUPPORTED</strong> progressive climate legislation <br>
-      <strong class="tab">DISCLOSED</strong>, publicly, their climate actions <br>
-      <br>
-      Click <a target="_blank" href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
-      <br>
-      <h2> Explore Other Sectors </h2>
-      <br>
-      <p> Curious about which companies are doing the best in each category? Check out the sectors below for listings! </p>
     </div>
-  </body>
+    <br> 
+    <h3> What is a Climate Score? </h3>
+    <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: </p>       
+    <div class = "inset">
+      <p>
+        <strong>MEASURED</strong> their climate "footprint",
+        <strong>REDUCED</strong> their impact on global warming,
+        <strong>SUPPORTED</strong> progressive climate legislation,
+        and publicly <strong>DISCLOSED</strong> their climate actions <br>
+      </p>
+    </div>
+    <br>
+    <p> Click <a href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
+    <br>
+    <h3> Explore Other Sectors </h3> 
+    <p> Curious about which companies are doing the best in each category? Check out the sectors below for listings! </p> 
+    <br>
+    <br> 
+    <img src="Banner16x193pt.png" class = "Logo" class="inline"> </img> <br> <h2 class="Closer"> #Hack4Good </h2>
+  </div>
+</body>
 </html>
