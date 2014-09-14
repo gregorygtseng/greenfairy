@@ -132,6 +132,19 @@ form{
   padding-left: 20px;
 }
 
+.LoadingContent{
+  padding: 0px;
+  height: 10px;
+  line-height: 10px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.LoadingContainer{
+  height: 380px;
+  width:310px;
+}
+
 .Logo{
   height:20pt; 
   vertical-align: middle;
