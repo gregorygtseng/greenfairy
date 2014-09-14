@@ -207,6 +207,7 @@ var greenFairy = {
                     spacingLeft: 0,
                     spacingRight: 0
                 },
+                colors: ['#00a0df', '#90ed7d'],
                 credits: {
                     enabled: false,
                 },
@@ -264,6 +265,7 @@ var greenFairy = {
                    spacingLeft: 0,
                    spacingRight: 0
                },
+               colors: ['#00a0df', '#90ed7d'],
                credits: {
                    enabled: false,
                },
