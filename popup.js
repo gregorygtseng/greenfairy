@@ -96,15 +96,10 @@ var greenFairy = {
             modifyHtml.setCompanyName(parsedJSON.Companies[0].Name);
             var score = parsedJSON.Companies[0].Scores.Scores[0].Total;
             modifyHtml.setScore(score);
-<<<<<<< HEAD
-            this.climateCountsApi.resultData.SectorCode = parsedJSON.Companies[0].SectorCode;
-=======
             results.SectorCode = parsedJSON.Companies[0].SectorCode;
             results.Company = parsedJSON.Companies[0].Name;
             results.Score = score;
 
-            chrome.browserAction.setBadgeText({text: score.toString()});
->>>>>>> 32dbfcc0540c418f0fc0a1eef38dcbc3d3d32e7d
         }
 
         // GET SECTOR INFORMATION FOR SEGMENTS
