@@ -1,7 +1,7 @@
 var greenFairy = {
     climateCountsApi: {
         baseApiUrl: "http://api.climatecounts.org/1/",
-        getAvailableYears: function() {}, // not needed
+        getAvailableYears: function() {},
         getSectors: function() {},
         getCompanies: function(search) {
             var apiUrl = this.baseApiUrl + "Companies.json?IncludeBrands=True&IncludeScores=True&StartsWith=True&Search=" + search;
@@ -10,6 +10,10 @@ var greenFairy = {
         getBrands: function() {},
         getScores: function(sector) {
             var apiUrl = this.baseApiUrl + "Scores.json?SortBy=Total&SortDirection=Descending&SectorCode=" + sector;
+            return apiUrl;
+        },
+        getScoresYear: function(companyId, year) {
+            var apiUrl = this.baseApiUrl + "Scores.json?Year=" + year + "&CompanyID=" + companyId;
             return apiUrl;
         },
         getAggregateScores: function(sector) {
@@ -35,7 +39,7 @@ var greenFairy = {
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var parsedJSON = JSON.parse(xmlhttp.responseText);
-                    self.parseData(parsedJSON, host);
+                    self.step1(parsedJSON, host);
                 }
             }
 
@@ -88,61 +92,17 @@ var greenFairy = {
         }
         return [ false, "" ];
     },
-    parseData: function(parsedJSON, host, currentTab) {
-        this.responseJSON = parsedJSON // debug
-
+    step3: function() {
+        var self = this;
         var modifyHtml = this.htmlModifiers;
-
-        if (parsedJSON === undefined) {
-            modifyHtml.setNoData(host);
-            return;
-        }
-
         var results = this.climateCountsApi.resultData;
-        var matching = this.checkOnlyCompanyNames(parsedJSON.Companies, host)
-        if (matching[0]) {
-            if (parsedJSON.Companies.length > 1) {
-                var x;
-                for (x in parsedJSON.Companies) {
-                    if (parsedJSON.Companies[x].Name === matching[1]) {
-                        var score = parsedJSON.Companies[x].Scores.Scores[1].Total
-                        results.SectorCode = parsedJSON.Companies[x].SectorCode;
-                        results.Company = parsedJSON.Companies[x].Name;
-                        results.Score = score;
-
-                        modifyHtml.setCompanyName(parsedJSON.Companies[x].Name);
-                        modifyHtml.setScore(score);
-                    } else {
-                        console.log("didn't match on " + parsedJSON.Companies[x].Name)
-                    }
-                }
-            } else {
-                var score = parsedJSON.Companies[0].Scores.Scores[1].Total;
-                results.SectorCode = parsedJSON.Companies[0].SectorCode;
-                results.Company = parsedJSON.Companies[0].Name;
-                results.Score = score;
-
-                modifyHtml.setCompanyName(parsedJSON.Companies[0].Name);
-                modifyHtml.setScore(score);
-            }
-        } else {
-            modifyHtml.setNoData(host);
-            return;
-        }
-        //MAKE GRAPHS USING SECTOR CODE
-        this.makeGraph1(results.SectorCode);
-        // this.makeGraph2(results.SectorCode);
-    
-        // GET SECTOR INFORMATION FOR SEGMENTS
         var xmlhttp = new XMLHttpRequest();
-        var apiUrl = this.climateCountsApi.getScores(results.SectorCode);
+        var apiUrl = self.climateCountsApi.getScores(results.SectorCode);
 
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 var parsedJSON = JSON.parse(xmlhttp.responseText);
                 var scores = parsedJSON.Scores;
-                modifyHtml.setSector(scores[0].Sector)
-
                 var ranking;
                 var allCompanies = scores.length;
                 var i;
@@ -151,11 +111,14 @@ var greenFairy = {
                         ranking = i + 1;
                     }
                 }
+
+                modifyHtml.setSector(scores[0].Sector)
                 modifyHtml.setRanking(ranking, allCompanies)
                 modifyHtml.setTopThree(scores[0].Company + " (" + scores[0].Total + ")",scores[1].Company + " (" + scores[1].Total + ")",scores[2].Company + " (" + scores[2].Total + ")")
 
-
-
+                //MAKE GRAPHS USING SECTOR CODE
+                self.makeGraph1(results.SectorCode);
+                // this.makeGraph2(results.SectorCode);
 
                 /// NOW SHOW THE STUFF
                 setTimeout(function() {
@@ -164,10 +127,62 @@ var greenFairy = {
                 }, 100)
             }
         }
-
         xmlhttp.open("GET", apiUrl, true);
         xmlhttp.send();
-        
+    },
+    step2: function() {
+        var self = this;
+        var modifyHtml = this.htmlModifiers;
+        var results = this.climateCountsApi.resultData;
+        var xmlhttp = new XMLHttpRequest();
+        var apiUrl = this.climateCountsApi.getScoresYear(results.CompanyId, 2012); // only fetch the latest data, which is 2012 for now
+
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var parsedJSON = JSON.parse(xmlhttp.responseText);
+
+                results.SectorCode = parsedJSON.Scores[0].SectorCode;
+                results.Company = parsedJSON.Scores[0].Company;
+                results.Score = parsedJSON.Scores[0].Total;
+
+                modifyHtml.setCompanyName(results.Company);
+                modifyHtml.setScore(results.Score);
+
+                self.step3();
+            }
+        }
+        xmlhttp.open("GET", apiUrl, true);
+        xmlhttp.send();
+    },
+    step1: function(parsedJSON, host) {
+        var self = this;
+        var modifyHtml = this.htmlModifiers;
+
+        if (parsedJSON === undefined || parsedJSON === null) {
+            modifyHtml.setNoData(host);
+            return;
+        }
+
+        var results = this.climateCountsApi.resultData;
+        var matching = this.checkOnlyCompanyNames(parsedJSON.Companies, host)
+
+        if (matching[0]) {
+            if (parsedJSON.Companies.length > 1) {
+                var x;
+                for (x in parsedJSON.Companies) {
+                    if (parsedJSON.Companies[x].Name === matching[1]) {
+                        results.CompanyId = parsedJSON.Companies[x].CompanyID;
+                        self.step2();
+                    }
+                }
+            } else {
+                results.CompanyId = parsedJSON.Companies[0].CompanyID;
+                self.step2();
+            }
+        } else {
+            modifyHtml.setNoData(host);
+            return;
+        }
     },
     parseUri: function(url) {
         var parser = document.createElement('a');
