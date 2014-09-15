@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Green Fairy</title>
-    <link rel="stylesheet" type="text/css" href="popup.css">
+<head>
+  <title>Green Fairy</title>
+  <link rel="stylesheet" type="text/css" href="popup.css">
     <!--
     - JavaScript and HTML must be in separate files: see our Content Security
     - Policy documentation[1] for details and explanation.
     -
     - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-    -->
-    <script src="popup.js"></script>
-    <script src="jquery.min.js"></script>
-  </script>
-  </head>
-  <a href="#"></a>
-  <body>
+  -->
+  <script src="popup.js"></script>
+  <script src="jquery.min.js"></script>
+</script>
+</head>
+<a href="#"></a>
+<body>
   <div id="c"></div>
-    <div class="TopBanner" class="pad">
-      <h2 class="inline" class="ExtensionName"> Green Fairy</h2>
-      <h3 class="inline"> Climate Score Lookup</h3>
-    </div>
-    <div id="loading">
-
-
-  <div  class="TopBar" class="pad">
+  <div class="TopBanner" class="pad">
+    <h2 class="inline" class="ExtensionName"> Green Fairy</h2>
+    <h3 class="inline"> Climate Score Lookup</h3>
+  </div>
+  <div id="loading">
+    <div  class="TopBar" class="pad">
       <h2 class="inline"> Loading... </h2>
     </div>
     <div class="pad">
       <div class="Loading">
         <div class="LoadingContent">
           <!-- <p class="LoadingContent"> One Moment Please... </p> -->
+          <br>
+          <br>
+          <br>
+          <p class="half-line">&nbsp;</p>
           <img src="earth_preloader_credit_mangustas.gif" style = "width:32px; height:32px"> </img>
         </div>
       </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <p class="half-line">&nbsp;</p>
   </div>
-    <div id="no-data">
-      <div class="TopBar" class="pad">
-        <h2 class="inline"> No Data </h2>
-        <p class="inline"> is available for </p>
-        <h1 class="inline" id="js-notfound"> GMail.com <h1> <!-- js: Company Name -->
+  <div id="no-data">
+    <div class="TopBar" class="pad">
+      <h2 class="inline"> No Data </h2>
+      <p class="inline"> is available for </p>
+      <h1 class="inline" id="js-notfound"> GMail.com <h1> <!-- js: Company Name -->
       </div>
       <div class="pad">
         <h3>Want that to See Their Data?</h3>
         <p class="inline"> Unfortunately, we don't have every company's data in our records. But, if you fill in the form below, we'll go ahead and ask the company to disclose some information for our database!
-        <br>
-        <br>
-        Thanks for doing your part!
+          <br>
+          <br>
+          Thanks for doing your part!
         </p>
         <br>
         <br>
@@ -73,6 +81,12 @@
           <br>
           <input type="submit" value="Submit!" class="formsubmit">
         </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
     </div>
     <div id="loaded">
@@ -80,80 +94,142 @@
         <h2 class="inline js-companydomain"></h2> <!-- js: Company Name -->
         <p class="inline">'s Climate Score: </p>
         <h1 class="inline js-companyscore"><h2> <!-- js: Company Score -->
-      </div>
-      <div class="pad">
-        <h3>Compare</h3>
-        <p class="inline"> How does </p>
-        <div class="main js-companydomain" id="BodyCompany"></div> <!-- js: Company Name -->
-        <p class="inline"> compare to other </p>
-        <div class="main js-sector" id="BodySector"></div> <!-- js: Company Sector -->
-        <p class="inline">companies? </p>
-        <br>
-        <br>
-        <div class="Graph">
-          
-          <div id="RelSector">  Sector Graph </div> <!-- js: Sector Graph -->
-          <div style="padding-left: 90px;">  % Within Sector </div>
-
-          <!-- <div class="floatright" id="RelTotal">  Total Graph </div> <!-- js: Total Graph -->
-          <div class="TopScores">
-            <br>
-            <p class="inline"> Try to support these Top Scoring </p>
-            <div class="inline js-sector" id="GraphSector"></div> <!-- js: Company Sector -->
-            <p class="inline"> companies while shopping:
-            </p>
-            <br>
-            <p class="half-line">&nbsp;</p>
-            <ol type="1">
-              <li>
-                <div id="TopScore1">
-                </div>
-              </li>
-              <li>
-                <div id="TopScore2">
-                </div>
-              </li>
-              <li>
-                <div id="TopScore3">
-                </div>
-              </li>
-            </ol>
-            <br>
-            <div class="inline js-companydomain" id="CompanyName"></div> <!-- js: Company Name -->
-            <p class="inline"> ranks </p>
-            <div class="inline js-sectorrank" id="CompanyPosition"></div> <!-- js: Company Rank -->
-            <p class="inline"> of </p>
-            <div class="inline js-sectortotal" id="SectorTotal"></div> <!-- js: Sector Total-->
-            <p class="inline"> companies in this category.</p>
-            <br><br>
-            <p class="inline">The company's score has </p>
-            <div class="inline" id="Change"> decreased </div> <!-- js: Company Status (based on Positive/Negative) -->
-            <p class="inline"> by </p>
-            <div class="inline" id="ChangeValue"> 3 </div> <!-- js: Company Change -->
-            <p class="inline"> points in the last year. </p>
+        </div>
+        <div class="pad">
+          <p class="half-line">&nbsp;</p>
+          <h3>Compare</h3>
+          <p class="inline"> How does </p>
+          <div class="main js-companydomain" id="BodyCompany"></div> <!-- js: Company Name -->
+          <p class="inline"> compare to other </p>
+          <div class="main js-sector" id="BodySector"></div> <!-- js: Company Sector -->
+          <p class="inline">companies? </p>
+          <br>
+          <br>
+          <div class="Graph">
+            <div id="RelSector">  Sector Graph </div> <!-- js: Sector Graph -->
+            <div style="padding-left: 90px;">  % Within Sector </div>
+            <!-- <div class="floatright" id="RelTotal">  Total Graph </div> <!-- js: Total Graph -->
+            <div class="TopScores">
+              <br>
+              <p class="inline"> Try to support these Top Scoring </p>
+              <div class="inline js-sector" id="GraphSector"></div> <!-- js: Company Sector -->
+              <p class="inline"> companies while shopping:
+              </p>
+              <br>
+              <p class="half-line">&nbsp;</p>
+              <ol type="1">
+                <li>
+                  <div id="TopScore1">
+                  </div>
+                </li>
+                <li>
+                  <div id="TopScore2">
+                  </div>
+                </li>
+                <li>
+                  <div id="TopScore3">
+                  </div>
+                </li>
+              </ol>
+              <br>
+              <div class="inline js-companydomain" id="CompanyName"></div> <!-- js: Company Name -->
+              <p class="inline"> ranks </p>
+              <div class="inline js-sectorrank" id="CompanyPosition"></div> <!-- js: Company Rank -->
+              <p class="inline"> of </p>
+              <div class="inline js-sectortotal" id="SectorTotal"></div> <!-- js: Sector Total-->
+              <p class="inline"> companies in this category.</p>
+              <br><br>
+              <p class="inline">The company's score has </p>
+              <div class="inline" id="Change"> decreased </div> <!-- js: Company Status (based on Positive/Negative) -->
+              <p class="inline"> by </p>
+              <div class="inline" id="ChangeValue"> 3 </div> <!-- js: Company Change -->
+              <p class="inline"> points in the last year. </p>
+            </div>
           </div>
+          <br>
+        </div>
+      </div>
+      <div id="footer" class="pad">
+
+        <div class="ScrollDown"> 
+          <img src= "single_dropdown_arrow10pt.png" class="inline" style="height:7px"> </img>
+          <p class = "inline"> &nbsp; Scroll down for more information &nbsp; </p> 
+          <img src= "single_dropdown_arrow10pt.png" class="inline" style="height:7px"> </img>
+        </div>
+
+        <br>
+
+        <h3> What is a Climate Score? </h3>
+        <p> Climate Counts uses a 0 - 100 point scale and 22 criteria to determine if companies have: </p>
+        <div class="inset">
+          <p><strong>MEASURED</strong> their climate "footprint",</p>
+          <p><strong>REDUCED</strong> their impact on global warming,</p>
+          <p><strong>SUPPORTED</strong> progressive climate legislation, and publicly</p>
+          <p><strong>DISCLOSED</strong> their climate actions.</p>
         </div>
         <br>
+        <p> Click <a target="_blank" href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
+        <br>
+        <h3> Explore Other Sectors </h3>
+        <p> Curious about which companies are doing the best in each category? Check out the sectors below for listings! </p>
+        <br>
+        <div class = "ExploreSectors">
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=26" class="ExploreSectorsContent">
+            <img alt="Airlines" src="sector_icons/AirlineIcon.png" title = "Airlines"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=11" class="ExploreSectorsContent">
+            <img alt="Apparel/Accessories" src="sector_icons/sector_icon_apparel.png" title = "Apparel/Accessories"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=12" class="ExploreSectorsContent">
+            <img alt="Beverages-Beer" src="sector_icons/sector_icon_beverages.png" title = "Beverages-Beer"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=27" class="ExploreSectorsContent">
+            <img alt="Commercial Banking" src="sector_icons/BankIcon.png" title = "Commercial Banking"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=24" class="ExploreSectorsContent">
+            <img alt="Consumer Shipping" src="sector_icons/sector_icon_shipping.png" title = "Consumer Shipping"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=15" class="ExploreSectorsContent">
+            <img alt="Food Products" src="sector_icons/sector_icon_food_products.png" title = "Food Products"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=16" class="ExploreSectorsContent">
+            <img alt="Food Services" src="sector_icons/sector_icon_food_services.png" title = "Food Services"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=31" class="ExploreSectorsContent">
+            <img alt="Home and Office Furniture" src="sector_icons/OfficeFurniture.PNG" title = "Home and Office Furniture"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=25" class="ExploreSectorsContent">
+            <img alt="Hotels" src="sector_icons/HotelIcon.png" title = "Hotels"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=17" class="ExploreSectorsContent">
+            <img alt="Household Products" src="sector_icons/sector_icon_household_products.png" title = "Household Products"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=32" class="ExploreSectorsContent">
+            <img alt="Industry Innovators" src="sector_icons/i2.png" title = "Industry Innovators"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=18" class="ExploreSectorsContent">
+            <img alt="Internet/Social Media" src="sector_icons/sector_icon_internet.png" title = "Internet/Social Media"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=30" class="ExploreSectorsContent">
+            <img alt="Large Appliances" src="sector_icons/LargeAppliance.PNG" title = "Large Appliances"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=14" class="ExploreSectorsContent">
+            <img alt="Media" src="sector_icons/sector_icon_media.png" title = "Media"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=29" class="ExploreSectorsContent">
+            <img alt="Pharmaceuticals" src="sector_icons/pharmaceutical.png" title = "Pharmaceuticals"/>
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=13" class="ExploreSectorsContent">
+            <img alt="Technology" src="sector_icons/sector_icon_electronics.png" title = "Technology">
+          </a>
+          <a href="http://climatecounts.org/scorecard_sectors.php?id=28" class="ExploreSectorsContent">
+            <img alt="Toys & Children's Equipment" src="sector_icons/CC_Icons_Top.png" title = "Toys & Children's Equipment"/>
+          </a>
+        </div>
+        <br>
+        <br>
+        <img src="Banner16x193pt.png" class="Logo" class="inline"> </img> <br> <h2 class="Closer"> #Hack4Good </h2>
       </div>
-    </div>
-    <div id="footer" class="pad">
-      <h3> What is a Climate Score? </h3>
-      <p> Climate Counts uses a 0-to-100 point scale and 22 criteria to determine if companies have: </p>
-      <div class="inset">
-        <p><strong>MEASURED</strong> their climate "footprint",</p>
-        <p><strong>REDUCED</strong> their impact on global warming,</p>
-        <p><strong>SUPPORTED</strong> progressive climate legislation, and publicly</p>
-        <p><strong>DISCLOSED</strong> their climate actions.</p>
-      </div>
-      <br>
-      <p> Click <a target="_blank" href="http://www.climatecounts.org/scorecard_overview.php"> here</a> for more information. </p>
-      <br>
-      <h3> Explore Other Sectors </h3>
-      <p> Curious about which companies are doing the best in each category? Check out the sectors below for listings! </p>
-      <br>
-      <br>
-      <img src="Banner16x193pt.png" class="Logo" class="inline"> </img> <br> <h2 class="Closer"> #Hack4Good </h2>
-    </div>
-  </body>
-  <script src="highcharts.js"></script>
-</html>
+    </body>
+    <script src="highcharts.js"></script>
+    </html>
