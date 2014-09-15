@@ -4,7 +4,7 @@
 -------------------------------------------
   1) open chrome and under the menu go to settings, then extensions.
   2) remove any old greenFairy extension
-  3) download the greenFairy.crx file (link forthcoming) and ignore warnings from chrome.
+  3) download the greenFairy.crx file [link](https://git.geekli.st/dibyo/greenfairy/blob/master/greenFairy.crx) and ignore warnings from chrome.
   4) drag and drop the greenFairy.crx file onto the chrome extensions page
   5) open a new website (e.g. google.com) and click "Green Fairy" button on right side of address bar.
 
