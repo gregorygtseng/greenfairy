@@ -100,7 +100,7 @@ form{
 }
 
 .pad{
-  padding: 20px;
+  padding: 5px 20px 5px 20px;
 }
 
 .inline{
@@ -141,6 +141,7 @@ form{
 }
 
 .LoadingContainer{
+  background: #00a0d1;
   height: 380px;
   width:310px;
 }
@@ -263,6 +264,36 @@ form{
 #ChangeValue{
   color: #454545;
   font-weight: bold;
+}
+
+.ScrollDown{
+  background: #00a0d1;
+  text-align: center;
+  width: 300px;
+}
+
+.ScrollDown p{
+  text-align: center;
+}
+
+.ExploreSectors{
+  width: 310px;
+  margin: 0 auto;
+}
+
+.ExploreSectors a{
+  text-decoration: none;
+}
+
+.ExploreSectorsContent{
+  margin: 5px;
+
+}
+
+.ExploreSectorsContent img{
+  width: 30 px;
+  height: 30 px;  
+  margin-top: 10px;
 }
 
 .Closer{
